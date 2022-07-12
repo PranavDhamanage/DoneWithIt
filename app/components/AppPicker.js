@@ -18,16 +18,19 @@ import PickerItem from "./PickerItem";
 function AppPicker({
   icon,
   items,
+  numberOfColumns = 1,
   onSelectItem,
   selectedItem,
+  PickerItemComponent = PickerItem,
   placeholder,
+  width = "100%",
   ...otherProps
 }) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -36,9 +39,11 @@ function AppPicker({
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -50,10 +55,12 @@ function AppPicker({
         <Screen>
           <Button title="Close" onPress={() => setModalVisible(false)}></Button>
           <FlatList
+            numColumns={numberOfColumns}
             data={items}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
+                item={item}
                 label={item.label}
                 onPress={() => {
                   setModalVisible(false);
@@ -71,13 +78,14 @@ function AppPicker({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: defaultStyles.colors.light,
-    width: "100%",
+    // width: "100%",
     flexDirection: "row",
     borderRadius: 15,
     padding: 15,
     marginVertical: 10,
   },
   icon: { marginRight: 10 },
+  placeholder: { color: defaultStyles.colors.medium, flex: 1 },
   text: { flex: 1 },
   //   textInput: {
   //     fontSize: 18,

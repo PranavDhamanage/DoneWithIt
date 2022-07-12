@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import * as ImagePicker from "expo-image-picker";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -31,6 +32,8 @@ import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
+import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -38,23 +41,20 @@ const categories = [
   { label: "Cameras", value: 3 },
 ];
 export default function App() {
-  console.log("app executed");
-  // console.log(useDimensions())
-  // console.log(useDeviceOrientation());
-  let x = 112;
-  // x.toString();
-  const [category, setCategory] = useState();
-
-  const handlePress = () => {
-    console.log("text pressed");
-  };
-
   return (
+    // <Screen>
+    //   <ImageInputList
+    //     imageUris={imageUris}
+    //     onRemoveImage={handleRemove}
+    //     onAddImage={handleAdd}
+    //   />
+    // </Screen>
     // <View style={styles.container}>
     //   <View style={styles.box1}></View>
     //   <View style={styles.box2}></View>
     //   <View style={styles.box3}></View>
     // </View>
+    <ListingEditScreen />
     // <ListingDetailsScreen />
     // <View
     //   style={{
@@ -81,7 +81,8 @@ export default function App() {
     //   />
     // </Screen>
     // <LoginScreen />
-    <ListingEditScreen />
+    // <ListingEditScreen />
+    // <MessagesScreen />
     // <Screen>
     //   <Icon name="email" size={40} />
     // </Screen>
