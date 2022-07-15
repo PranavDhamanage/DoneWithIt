@@ -9,6 +9,7 @@ import CategoryPickerItem from "../components/CategoryPickerItem";
 import FormImagePicker from "../components/forms/FormImagePicker";
 import * as Location from "expo-location";
 import useLocation from "../hooks/useLocation";
+
 // import styles from "../config/styles";
 
 const categories = [

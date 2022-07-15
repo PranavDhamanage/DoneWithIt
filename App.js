@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -34,14 +37,69 @@ import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ImageInput from "./app/components/ImageInput";
 import ImageInputList from "./app/components/ImageInputList";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 const categories = [
   { label: "Furniture", value: 1 },
   { label: "Clothing", value: 2 },
   { label: "Cameras", value: 3 },
 ];
+
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Tweets" component={Tweets} />
+    <Stack.Screen
+      name="TweetDetails"
+      component={TweetDetails}
+      options={{
+        headerStyle: {
+          backgroundColor: "tomato",
+        },
+      }}
+    />
+  </Stack.Navigator>
+);
+
+const Account = () => (
+  <Screen>
+    <Text>Account</Text>
+  </Screen>
+);
+
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+  <Tab.Navigator>
+    <Tab.Screen name="Feed" component={Tweets} />
+    <Tab.Screen name="Account" component={Account} />
+  </Tab.Navigator>
+);
+
+const Tweets = ({ navigation }) => (
+  <Screen>
+    <Text>Tweet</Text>
+    <Button
+      title="View Tweet"
+      onPress={() => navigation.navigate("TweetDetails", { id: 1 })}
+    />
+  </Screen>
+);
+const TweetDetails = ({ route }) => (
+  <Screen>
+    <Text>Tweet Details {route.params.id}</Text>
+  </Screen>
+);
+
 export default function App() {
   return (
+    <NavigationContainer theme={navigationTheme}>
+      {/* <AuthNavigator /> */}
+      <AppNavigator />
+      {/* <StackNavigator /> */}
+      {/* <TabNavigator /> */}
+    </NavigationContainer>
     // <Screen>
     //   <ImageInputList
     //     imageUris={imageUris}
@@ -54,7 +112,7 @@ export default function App() {
     //   <View style={styles.box2}></View>
     //   <View style={styles.box3}></View>
     // </View>
-    <ListingEditScreen />
+    // <ListingEditScreen />
     // <ListingDetailsScreen />
     // <View
     //   style={{

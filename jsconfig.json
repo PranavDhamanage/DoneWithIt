@@ -1,3 +1,16 @@
 {
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    // "baseUrl": "."
+    // "moduleResolution": "node",
+    // "paths": {
+    //   "*": ["./app"],
+    //   "@components/*": ["components/*"],
+    //   "@config/*": ["config/*"],
+    //   "@hooks/*": ["hooks/*"],
+    //   "@screens/*": ["screens/*"],
+    //   "@assets/*": ["assets/*"],
+    //   "@navigation/*": ["navigation/*"]
+    // }
+  }
 }
